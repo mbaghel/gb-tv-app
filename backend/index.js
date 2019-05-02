@@ -37,7 +37,7 @@ server.applyMiddleware({
   app,
   cors: {
     credentials: true,
-    origin: process.env.FRONTEND_URL
+    origin: process.env.TEST_URL
   }
 });
 

@@ -9,7 +9,10 @@ import VideoPage from "./VideoPage";
 import PageWithNav from "./PageWithNav";
 
 const client = new ApolloClient({
-  uri: process.env.NODE_ENV === "development" ? endpoint : endpoint,
+  uri:
+    process.env.NODE_ENV === "development"
+      ? process.env.REACT_APP_BACKEND
+      : endpoint,
   request: operation => {
     operation.setContext({
       fetchOptions: {
