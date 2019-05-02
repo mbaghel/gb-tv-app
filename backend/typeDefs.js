@@ -1,6 +1,9 @@
 const { gql } = require("apollo-server");
 
 const typeDefs = gql`
+  type SuccessMessage {
+    message: String
+  }
   type Video {
     id: Int!
     name: String!
@@ -10,6 +13,9 @@ const typeDefs = gql`
   }
   type Query {
     getLatest: [Video]
+  }
+  type Mutation {
+    signin(appCode: String!): SuccessMessage
   }
 `;
 
