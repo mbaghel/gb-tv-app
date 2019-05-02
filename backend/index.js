@@ -14,11 +14,9 @@ app.use(cookieParser());
 
 app.use((req, res, next) => {
   const { gbToken } = req.cookies;
-  console.log(gbToken);
   if (gbToken) {
     const { regCode } = jwt.verify(gbToken, process.env.APP_SECRET);
     req.regCode = regCode;
-    console.log(regCode);
   }
   next();
 });
@@ -32,7 +30,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers: { Query, Mutation },
   dataSources,
-  context: ({ res }) => ({ res })
+  context: ({ req }) => ({ ...req })
 });
 
 server.applyMiddleware({
