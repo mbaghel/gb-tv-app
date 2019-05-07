@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import { IS_REGISTERED_QUERY } from "./AuthGate";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($appCode: String!) {
@@ -10,47 +11,24 @@ const SIGNIN_MUTATION = gql`
   }
 `;
 
-class Signin extends React.Component {
-  state = {
-    appCode: ""
-  };
+const Signin = () => {
+  const [appCode, setAppCode] = useState("");
 
-  saveToState = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  render() {
-    return (
-      <Mutation mutation={SIGNIN_MUTATION} variables={this.state}>
-        {(signin, { error, loading, data }) => (
-          <div>
-            <h1>Sign in</h1>
-            <form
-              method="post"
-              onSubmit={async e => {
-                e.preventDefault();
-                await signin();
-                this.setState({ appCode: "" });
-              }}
-            >
-              <fieldset disabled={loading} aria-busy={loading}>
-                <p>Enter appCode here (case-sensitive):</p>
-                <input
-                  name="appCode"
-                  placeholder="x0X0x"
-                  type="text"
-                  onChange={this.saveToState}
-                />
-                <button type="submit">Submit</button>
-              </fieldset>
-            </form>
-            {error && error.message}
-            {data && data.signin.message}
-          </div>
-        )}
-      </Mutation>
-    );
-  }
-}
+  return (
+    <Mutation
+      mutation={SIGNIN_MUTATION}
+      variables={{ appCode }}
+      refetchQueries={[{ query: IS_REGISTERED_QUERY }]}
+    >
+      {(signin, { error, loading }) => (
+        <div>
+          <button onClick={signin} disabled={loading} aria-busy={loading}>
+            Link Account
+          </button>
+        </div>
+      )}
+    </Mutation>
+  );
+};
 
 export default Signin;

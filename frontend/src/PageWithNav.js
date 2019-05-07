@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Route } from "react-router-dom";
 import ListVideos from "./ListVideos";
-import Signin from "./Signin";
+import Signout from "./Signout";
 
 const PageWithNav = () => {
   return (
@@ -23,7 +23,7 @@ const PageWithNav = () => {
           <NavLink to="/watchlist">Watchlist</NavLink>
         </li>
         <li>
-          <NavLink to="/signin">Sign In</NavLink>
+          <NavLink to="/signout">Sign Out</NavLink>
         </li>
       </ul>
       <Route exact path="/" render={() => <h1>Home</h1>} />
@@ -31,7 +31,7 @@ const PageWithNav = () => {
       <Route path="/search" render={() => <h1>Search</h1>} />
       <Route path="/shows" render={() => <h1>Shows</h1>} />
       <Route path="/watchlist" render={() => <h1>Watchlist</h1>} />
-      <Route path="/signin" render={props => <Signin {...props} />} />
+      <Route path="/signout" render={() => <Signout />} />
     </div>
   );
 };

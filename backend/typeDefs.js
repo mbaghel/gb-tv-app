@@ -13,9 +13,11 @@ const typeDefs = gql`
   }
   type Query {
     getLatest: [Video]
+    isRegistered: Boolean!
   }
   type Mutation {
     signin(appCode: String!): SuccessMessage
+    signout: SuccessMessage
   }
 `;
 

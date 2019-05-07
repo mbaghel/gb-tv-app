@@ -2,7 +2,15 @@ const jwt = require("jsonwebtoken");
 
 const Mutation = {
   signin: async (parent, args, ctx, info) => {
-    const authObj = await ctx.dataSources.AuthAPI.signin(args.appCode);
+    // const authObj = await ctx.dataSources.AuthAPI.signin(args.appCode);
+
+    // ************temp override for testing
+    const authObj = {
+      regToken: process.env.GB_KEY,
+      expiration: Date.UTC(2019, 11, 11) / 1000
+    };
+    // *************************************
+
     if (!authObj.regToken) {
       throw new Error(
         "Failed to register application, incorrect or expired code."
@@ -23,6 +31,11 @@ const Mutation = {
     return {
       message: `Application registered until ${expires.toDateString()}`
     };
+  },
+
+  signout: (parent, args, ctx, info) => {
+    ctx.res.clearCookie("gbToken");
+    return { message: "Goodbye!" };
   }
 };
 
