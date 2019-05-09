@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import styled from "styled-components/macro";
+
+const LetterDiv = styled.div`
+  width: 600px;
+`;
 
 const Keyboard = props => {
   const [isShifted, setIsShifted] = useState(false);
@@ -19,7 +24,7 @@ const Keyboard = props => {
 
   return (
     <>
-      <div>
+      <LetterDiv>
         {listAlphabet()}
         <button onClick={props.handleLetters}>1</button>
         <button onClick={props.handleLetters}>2</button>
@@ -31,7 +36,7 @@ const Keyboard = props => {
         <button onClick={props.handleLetters}>8</button>
         <button onClick={props.handleLetters}>9</button>
         <button onClick={props.handleLetters}>0</button>
-      </div>
+      </LetterDiv>
       <div>
         <button onClick={() => setIsShifted(!isShifted)}>Caps</button>
         <button onClick={props.backSpace}>Backspace</button>
