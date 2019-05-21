@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
@@ -19,10 +20,10 @@ const ListVideos = () => {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>{error.message}</p>;
         return data.getLatest.map(video => (
-          <div key={video.id}>
+          <Link key={video.id} to={`/video/${video.id}`}>
             <h5>{video.name}</h5>
             <p>{video.deck}</p>
-          </div>
+          </Link>
         ));
       }}
     </Query>

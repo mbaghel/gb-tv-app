@@ -61,6 +61,9 @@ iframe {
 a {
   text-decoration: none;
   color: ${props => props.theme.textColor};
+  :focus {
+    color: red;
+  }
 }
 `;
 
@@ -83,14 +86,14 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <>
         <Router>
-          <div className="App">
+          <>
             <AuthGate>
               <Switch>
                 <Route path="/video/:id" component={VideoPage} />
                 <Route component={PageWithNav} />
               </Switch>
             </AuthGate>
-          </div>
+          </>
         </Router>
         <GlobalStyle />
       </>

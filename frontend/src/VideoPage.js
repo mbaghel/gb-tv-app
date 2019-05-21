@@ -1,12 +1,8 @@
 import React from "react";
+import Video from "./Video";
 
 const VideoPage = props => {
-  console.log(props);
-  return (
-    <div>
-      <p>This is video w/ id: {props.match.params.id}</p>
-    </div>
-  );
+  return <Video id={props.match.params.id} />;
 };
 
 export default VideoPage;

@@ -2,6 +2,7 @@ const { RESTDataSource } = require("apollo-datasource-rest");
 
 const apiURL = "https://www.giantbomb.com/api/";
 const userAgent = "VewdApp (test)";
+const videoTypeID = 2300;
 
 class VideosAPI extends RESTDataSource {
   constructor() {
@@ -19,6 +20,12 @@ class VideosAPI extends RESTDataSource {
     return this.get("videos/", {
       limit: 10,
       field_list: "id,name,deck,premium,length_seconds"
+    });
+  }
+
+  async getURLs(id) {
+    return this.get(`video/${videoTypeID}-${id}/`, {
+      field_list: "hd_url,high_url,low_url,saved_time"
     });
   }
 }

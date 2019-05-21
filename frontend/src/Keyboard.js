@@ -2,7 +2,21 @@ import React, { useState } from "react";
 import styled from "styled-components/macro";
 
 const LetterDiv = styled.div`
-  width: 600px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  width: 25vw;
+  height: 25vw;
+  justify-content: space-between;
+`;
+
+const KeyButton = styled.button`
+  width: 16%;
+  height: 16%;
+  font-size: inherit;
+  color: inherit;
+  background-color: black;
+  border: none;
 `;
 
 const Keyboard = props => {
@@ -14,9 +28,9 @@ const Keyboard = props => {
     for (let i = 0; i < 26; i++) {
       const char = String.fromCharCode(aCode + i);
       keys.push(
-        <button onClick={props.handleLetters} key={char}>
+        <KeyButton onClick={props.handleLetters} key={char}>
           {char}
-        </button>
+        </KeyButton>
       );
     }
     return keys;
@@ -26,22 +40,20 @@ const Keyboard = props => {
     <>
       <LetterDiv>
         {listAlphabet()}
-        <button onClick={props.handleLetters}>1</button>
-        <button onClick={props.handleLetters}>2</button>
-        <button onClick={props.handleLetters}>3</button>
-        <button onClick={props.handleLetters}>4</button>
-        <button onClick={props.handleLetters}>5</button>
-        <button onClick={props.handleLetters}>6</button>
-        <button onClick={props.handleLetters}>7</button>
-        <button onClick={props.handleLetters}>8</button>
-        <button onClick={props.handleLetters}>9</button>
-        <button onClick={props.handleLetters}>0</button>
+        <KeyButton onClick={props.handleLetters}>1</KeyButton>
+        <KeyButton onClick={props.handleLetters}>2</KeyButton>
+        <KeyButton onClick={props.handleLetters}>3</KeyButton>
+        <KeyButton onClick={props.handleLetters}>4</KeyButton>
+        <KeyButton onClick={props.handleLetters}>5</KeyButton>
+        <KeyButton onClick={props.handleLetters}>6</KeyButton>
+        <KeyButton onClick={props.handleLetters}>7</KeyButton>
+        <KeyButton onClick={props.handleLetters}>8</KeyButton>
+        <KeyButton onClick={props.handleLetters}>9</KeyButton>
+        <KeyButton onClick={props.handleLetters}>0</KeyButton>
       </LetterDiv>
-      <div>
-        <button onClick={() => setIsShifted(!isShifted)}>Caps</button>
-        <button onClick={props.backSpace}>Backspace</button>
-        <button onClick={props.clear}>Clear</button>
-      </div>
+      <KeyButton onClick={() => setIsShifted(!isShifted)}>{"^"}</KeyButton>
+      <KeyButton onClick={props.backSpace}>{"<-"}</KeyButton>
+      <KeyButton onClick={props.clear}>Cl</KeyButton>
     </>
   );
 };
